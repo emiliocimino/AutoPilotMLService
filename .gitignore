@@ -97,7 +97,7 @@ ENV/
 [Ll]ocal
 [Ss]cripts
 pyvenv.cfg
-.venv
+../.venv
 pip-selfcheck.json
 
 ### JetBrains template
@@ -182,6 +182,6 @@ fabric.properties
 # idea folder, uncomment if you don't need it
 # .idea
 /.idea/
-/uv.lock
+/src/uv.lock
 
 .run
