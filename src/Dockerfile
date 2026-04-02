@@ -3,7 +3,7 @@ LABEL authors="emiliocimino"
 
 WORKDIR /home
 
-COPY .. .
+COPY . .
 
 RUN uv sync --project pyproject.toml
 

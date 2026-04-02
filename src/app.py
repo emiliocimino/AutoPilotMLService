@@ -6,11 +6,11 @@ import numpy as np
 import keras
 import pickle
 
-with open("models/scaler_x.pickle", "rb") as f:
+with open("./models/scaler_x.pickle", "rb") as f:
     x_scaler = pickle.load(f)
-with open("models/scaler_y.pickle", "rb") as f:
+with open("./models/scaler_y.pickle", "rb") as f:
     y_scaler = pickle.load(f)
-model = keras.saving.load_model("models/speed_prediction.keras")
+model = keras.saving.load_model("./models/speed_prediction.keras")
 
 
 service = FastAPI(
