@@ -1,8 +1,8 @@
 from typing import Annotated
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
-from contextlib import asynccontextmanager
 
+import numpy as np
 import keras
 import pickle
 
@@ -25,6 +25,7 @@ service = FastAPI(
 class Request(BaseModel):
     quality: Annotated[float, Field(ge=0, le=1)]
 
+
 class Response(BaseModel):
     speed: Annotated[int, Field(ge=1, le=20)]
 
@@ -32,7 +33,7 @@ class Response(BaseModel):
 @service.post(
     "/infer",
     responses={400: {"model": str}, 500: {"model": str}},
-    response_class=Response,
+    response_model=Response,
     description="""Makes inference given a quality score
     """,
 )
@@ -40,7 +41,7 @@ async def infer_data(request: Request):
     x = x_scaler.transform([[request.quality]])
     y = model.predict(x)
     y = y_scaler.inverse_transform(y)
-    return Response(speed=int(y[0][0]))
+    return Response(speed=np.round(y[0][0], 0))
 
 
 if __name__ == "__main__":
