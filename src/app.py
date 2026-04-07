@@ -47,6 +47,7 @@ async def infer_data(request: Request):
     x = x_scaler.transform([[request.quality]])
     y = model.predict(x)
     y = y_scaler.inverse_transform(y)
+    y = np.clip(y, 1, 20)
     return Response(speed=np.round(y[0][0], 0))
 
 
